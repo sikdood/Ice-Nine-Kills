@@ -16,6 +16,7 @@
   --text-color--text-error: var(--base-color-system--error-red-dark);
   --base-color-system--success-green-dark: #17660f;
   --base-color-system--error-red: #cf0000;
+  --base-color-brand--red: #cf0000;
   --background-color--background-error: var(--base-color-system--error-red);
   --text-color--text-primary: var(--base-color-neutral--black);
   --background-color--background-warning: var(--base-color-system--warning-yellow);
@@ -26,7 +27,6 @@
   --background-color--background-success: var(--base-color-system--success-green);
   --text-color--text-success: var(--base-color-system--success-green-dark);
   --base-color-brand--blue-light: #d9e5ff;
-  --base-color-brand--red: #cf0000;
   --base-color-neutral--neutral-light: #aaa;
   --base-color-neutral--neutral-darkest: #111;
   --base-color-system--success-green: #cef5ca;
@@ -41,6 +41,31 @@
   --link-color--link-secondary: var(--base-color-neutral--black);
   --link-color--link-alternate: var(--base-color-neutral--white);
   --link-color--color: white;
+}
+
+.w-layout-grid {
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+.w-form-formradioinput--inputType-custom {
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+.w-form-formradioinput--inputType-custom.w--redirected-focus {
+  box-shadow: 0 0 3px 1px #3898ec;
+}
+
+.w-form-formradioinput--inputType-custom.w--redirected-checked {
+  border-width: 4px;
+  border-color: #3898ec;
 }
 
 .w-checkbox {
@@ -86,31 +111,6 @@
 
 .w-checkbox-input--inputType-custom.w--redirected-focus {
   box-shadow: 0 0 3px 1px #3898ec;
-}
-
-.w-layout-grid {
-  grid-row-gap: 16px;
-  grid-column-gap: 16px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
-  display: grid;
-}
-
-.w-form-formradioinput--inputType-custom {
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
-}
-
-.w-form-formradioinput--inputType-custom.w--redirected-focus {
-  box-shadow: 0 0 3px 1px #3898ec;
-}
-
-.w-form-formradioinput--inputType-custom.w--redirected-checked {
-  border-width: 4px;
-  border-color: #3898ec;
 }
 
 body {
@@ -396,7 +396,7 @@ figcaption {
 
 .heading-style-h3 {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
 }
 
@@ -572,7 +572,6 @@ figcaption {
 .form-input {
   border: 1px solid var(--base-color-neutral--neutral-lighter);
   border-radius: var(--border-radius--medium);
-  color: var(--base-color-neutral--black);
   background-color: #0000;
   width: 100%;
   min-height: 3.5rem;
@@ -622,7 +621,7 @@ figcaption {
 
 .heading-style-h2 {
   font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1;
 }
 
@@ -809,7 +808,7 @@ figcaption {
 }
 
 .section_navbar {
-  z-index: 10;
+  z-index: 1000;
   background-color: var(--base-color-neutral--white);
   position: sticky;
   top: 0;
@@ -1595,8 +1594,9 @@ figcaption {
   z-index: 100;
   color: var(--base-color-neutral--black);
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  width: 75%;
   margin-bottom: 2rem;
   text-decoration: none;
   display: flex;
@@ -1651,7 +1651,7 @@ figcaption {
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
+  display: grid;
 }
 
 .nav_menu {
@@ -2678,7 +2678,7 @@ figcaption {
   margin-top: 1rem;
   padding-bottom: 4rem;
   padding-right: 1rem;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .filter_filter-group-heading {
@@ -2779,7 +2779,7 @@ figcaption {
 }
 
 .filter_tag {
-  background-color: #f4f4f4;
+  background-color: var(--base-color-brand--red);
   align-items: center;
   margin-right: .5rem;
   padding: .5rem .75rem .5rem 1rem;
@@ -3862,8 +3862,7 @@ figcaption {
 .form_input {
   border: 1px solid var(--\<unknown\|variable-d4c54ba4-ee41-67ce-58a5-5216ca039f83\>);
   background-color: #0000;
-  min-height: 3rem;
-  margin-bottom: .75rem;
+  margin-bottom: 0;
   padding: .5rem 1rem;
 }
 
@@ -4156,7 +4155,7 @@ figcaption {
   }
 
   .menu-icon_line-top {
-    background-color: var(--base-color-neutral--black);
+    background-color: var(--base-color-neutral--white);
     width: 24px;
     height: 2px;
     padding-bottom: 0;
@@ -4164,7 +4163,7 @@ figcaption {
   }
 
   .menu-icon_line-middle {
-    background-color: var(--base-color-neutral--black);
+    background-color: var(--base-color-neutral--white);
     justify-content: center;
     align-items: center;
     width: 24px;
@@ -4184,7 +4183,7 @@ figcaption {
   }
 
   .menu-icon_line-bottom {
-    background-color: var(--base-color-neutral--black);
+    background-color: var(--base-color-neutral--white);
     width: 24px;
     height: 2px;
     padding-bottom: 0;
@@ -5399,23 +5398,6 @@ figcaption {
   align-self: start;
 }
 
-#w-node-e78e8996-7ac5-c230-915a-0607e681c372-25a73f75 {
-  align-self: center;
-}
-
-#w-node-_946c4dcd-3bf7-2b09-3073-715a0eb0badd-cf39daf1 {
-  grid-area: span 1 / span 1 / span 1 / span 1;
-  align-self: start;
-}
-
-#w-node-ced975e7-1b4d-f69e-9e83-8c61141236df-cf39daf1, #w-node-ced975e7-1b4d-f69e-9e83-8c61141236e0-cf39daf1, #w-node-_8c754474-e4d5-bcc2-d22b-03af6f725bec-cf39daf1 {
-  grid-area: span 1 / span 1 / span 1 / span 1;
-}
-
-#w-node-_946c4dcd-3bf7-2b09-3073-715a0eb0baf2-cf39daf1 {
-  justify-self: center;
-}
-
 #w-node-d6bbae16-8f44-71a8-a605-047474ba636f-cf39daf1 {
   grid-area: span 1 / span 1 / span 1 / span 1;
 }
@@ -5430,6 +5412,10 @@ figcaption {
 
 #w-node-fd87d5d8-8c6b-1eca-eca8-fdcf3f76b9b3-b641c10b {
   justify-self: start;
+}
+
+#w-node-_1dcf0fd5-3372-220d-54a3-92f3b17e91d4-b641c10b {
+  justify-self: end;
 }
 
 #w-node-aa708b66-30e1-8d40-41a3-a18b79d739ac-25a73fc4 {
@@ -5712,10 +5698,6 @@ figcaption {
 }
 
 @media screen and (max-width: 991px) {
-  #w-node-_946c4dcd-3bf7-2b09-3073-715a0eb0baf2-cf39daf1, #w-node-_946c4dcd-3bf7-2b09-3073-715a0eb0bb05-cf39daf1 {
-    justify-self: start;
-  }
-
   #w-node-d6bbae16-8f44-71a8-a605-047474ba6370-cf39daf1 {
     grid-area: 1 / 1 / 2 / 4;
   }
