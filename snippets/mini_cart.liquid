@@ -1,0 +1,185 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+
+    Alpine.data('handleMinicart', () => ({
+        init() {
+            console.log('handleMinicart init')
+        },
+        open: false,
+        note: null,
+        attributes: {},
+        original_total_price: 0,
+        total_price: 0,
+        total_discount: 0,
+        total_weight: 0.0,
+        item_count: 0,
+        products: [],
+        requires_shipping: false,
+        currency: 'EUR',
+        items_subtotal_price: 0,
+        cart_level_discount_applications: [],
+        cartApiResponseDefault : {
+            result : {},
+            show : false,
+            timeout : 5000,
+        },
+        cartApiResponse : {
+            result : {},
+            show : false,
+            timeout : 5000,
+        },
+
+        // deprecated:
+        total: {
+            items: 0,
+            price: 0,
+            weight: 0,
+            discount: 0,
+        },
+        _abortController : null,
+        initAbortController() {
+            if(this._abortController) {
+                this._abortController.abort('abort previous request');
+            }
+            this._abortController = new AbortController()
+        },
+        getAbortControllerSignal() {
+            return this._abortController.signal
+        },
+        resetAbortController() {
+            this._abortController = null;
+        },
+        toggleMiniCart() {
+            console.log('(minicart.js) toggleMiniCart called');
+
+            LiquifyHelper.handleTriggerClick();
+
+            this.getCart();
+        },
+
+        /**
+         * Get the cart data.
+         */
+        getCart() {
+            this.initAbortController()
+            fetch(window.Shopify.routes.root + 'cart.js', {
+                method: 'GET',
+                signal: this.getAbortControllerSignal(),
+                headers: {'Content-Type': 'application/json'},
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.resetAbortController();
+
+                this.total.items = data.item_count;
+
+                this.products = data.items.map((item) => {
+                    item.title = this.htmlspecialchars_decode(item.title)
+                    return item
+                })
+
+                this.total.price = data.total_price;
+                this.total.weight = data.total_weight;
+                this.total.discount = data.total_discount;
+
+                this.$dispatch('carttotalitems', data.item_count);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        },
+
+        /**
+         * @param id
+         * @param quantity
+         */
+        increaseCartItemQuantity(id, quantity) {
+            this.updateCartItemQuantity(id, parseInt(quantity) + 1);
+        },
+
+        /**
+         * @param id
+         * @param quantity
+         */
+        decreaseCartItemQuantity(id, quantity) {
+            this.updateCartItemQuantity(id, parseInt(quantity) - 1);
+        },
+
+        /**
+         * Update the cart item.
+         *
+         * @param id
+         * @param quantity
+         */
+        updateCartItemQuantity(id, quantity) {
+            this.initAbortController();
+            console.log('updateCartItemQuantity(): id, quantity: ', id, quantity);
+            this.products.filter((product)  => {
+                if(parseInt(product.id) === parseInt(id)) {
+                    product.quantity = quantity
+                }
+            })
+            fetch(window.Shopify.routes.root + 'cart/change.js', {
+                method: 'POST',
+                signal: this.getAbortControllerSignal(),
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    id: `${id}`,
+                    quantity: quantity,
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    this.resetAbortController();
+                    console.log('updateCartItemQuantity(): ', data);
+
+                    this.$dispatch('cartupdated');
+                    this.$dispatch('showcartmessage', { status: data.status, message: data.message, description: data.description });
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    this.$dispatch('showcartmessage', { status: error?.status, message: error, description: error });
+                });
+        },
+
+        /**
+         * Format monetary values.
+         */
+        moneyFormat(value, minor = true) {
+            return LiquifyHelper.moneyFormat(value, minor)
+        },
+
+        htmlspecialchars_decode(string) {
+            return LiquifyHelper.htmlspecialchars_decode(string)
+        },
+
+        /**
+         * Shows the minicart api message
+         * @param event
+         */
+        showCartMessage(event) {
+            console.log("dispatched showCartMessage", event)
+            if(event?.detail?.status) {
+                this.cartApiResponse.result = event.detail ?? this.cartApiResponseDefault.result;
+                this.cartApiResponse.show = true
+                setTimeout(() =>  this.cartApiResponse =  this.cartApiResponseDefault, this.cartApiResponse.timeout ?? 5000)
+            }
+        },
+    }))
+});
+
+
+</script>
+<div data-hover="false" data-delay="0" li-element="mini-cart" class="nav_dropdown w-dropdown" x-cloak="" x-data="handleMinicart()" x-init="getCart()" @cartupdated.window="getCart()" @setcartitem.window="updateCartItemQuantity($event.detail.product, $event.detail.quantity)" @increasecartitem.window="increaseCartItemQuantity($event.detail.product, $event.detail.quantity)" @decreasecartitem.window="decreaseCartItemQuantity($event.detail.product, $event.detail.quantity)" @toggleminicart.window="toggleMiniCart()" @showcartmessage.window="showCartMessage"><div li-element="mini-cart-toggle" class="nav_shop-icon w-dropdown-toggle" @click="$dispatch('cartupdated.window')"><div class="icon-embed-xsmall w-embed"><svg width="100%" height="100%" viewbox="0 0 243 256" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img"><g clip-path="url(#clip0_21_14)"><path d="M239 256C161.31 256 83.62 256 5.37 255.54C4.89 250.72 4.98 246.36 5.23 241.62C6.13 228.2 6.87 215.15 7.73 201.73C7.87 198.9 7.89 196.44 8.03 193.58C8.81 180.79 9.47 168.41 10.32 155.67C10.61 152.2 10.71 149.09 10.91 145.55C11.64 133.08 12.29 121.04 13.05 108.6C13.34 104.79 13.52 101.38 13.8 97.53C14.22 85.39 14.54 73.7 14.93 61.56C15.01 59.1 15.01 57.08 15.01 55.17C12.54 55.17 10.77 55.17 8.56 55.1C5.75 55.07 3.38 55.12 0.760002 55.09C0.350002 55.01 0.180002 55 0.0100021 55C0.0100021 50.31 0.0100021 45.62 0.480002 40.47C5.51 40 10.08 40 14.86 40C14.86 32.06 14.86 24.54 14.94 16.56C14.96 13.07 14.9 10.03 14.92 6.56C15 4.09 15.01 2.04 15.02 0C85.71 0 156.4 0 227.73 0.44C228.48 5.56 228.58 10.24 228.52 15.36C228.48 19.23 228.59 22.66 228.59 26.54C228.47 31.26 228.47 35.53 228.47 40H243.02C243.02 44.69 243.02 49.38 242.55 54.52C237.66 54.98 233.23 54.98 228.73 54.98C228.73 60.29 228.73 65.18 228.6 70.5C229.04 81.94 229.61 92.96 230.12 104.41C230.34 107.57 230.62 110.3 230.81 113.49C231.4 124.66 232.08 135.38 232.66 146.54C232.79 149.99 233.02 153 233.18 156.45C233.8 167.59 234.49 178.29 235.11 189.42C235.25 191.92 235.46 193.98 235.57 196.43C236.38 211.22 237.3 225.6 238.15 240.43C238.39 245.91 238.71 250.95 239.02 255.99M30.01 34.87V39.85C32.57 39.85 34.79 39.85 37.94 39.99C49.29 39.93 60.64 39.88 72.89 39.99C75.93 39.94 78.97 39.9 82.94 39.99C94.29 39.93 105.64 39.88 117.89 39.99C120.93 39.94 123.97 39.9 127.94 39.99C139.29 39.93 150.64 39.88 162.89 39.99C165.93 39.94 168.97 39.9 172.94 39.99C185.28 39.96 197.62 39.92 210.76 40.09C213.28 40.32 214.47 39.5 213.48 35.93V15.18C206.61 15.18 200.31 15.18 193.12 15.02C190.08 15.07 187.04 15.11 183.07 15.02C171.72 15.07 160.37 15.13 148.12 15.02C145.08 15.07 142.04 15.11 138.07 15.02C126.72 15.07 115.37 15.13 103.12 15.02C100.08 15.07 97.04 15.11 93.07 15.02C81.72 15.07 70.37 15.13 58.12 15.02C55.08 15.07 52.04 15.11 48.07 15.02H30.17C30.17 21.83 30.17 27.91 30.02 34.88M53.06 55.03C45.71 55.08 38.35 55.12 30.46 55.07C30.36 55.38 30.26 55.69 30.02 56.92V69.84C34.47 69.84 38.23 69.84 42.89 70.01C45.93 69.96 48.97 69.91 52.94 70.01C64.29 69.95 75.64 69.89 87.89 70.01C90.93 69.96 93.97 69.91 97.94 70.01C109.29 69.95 120.64 69.89 132.89 70.01C135.93 69.96 138.97 69.91 142.94 70.01C154.29 69.95 165.64 69.89 177.89 70.01C180.93 69.96 183.97 69.91 187.94 70.01H213.23C213.23 65.14 213.23 60.59 213.47 55.55C212.99 55.42 212.5 55.3 211.1 55.03C207.07 55.09 203.05 55.14 198.12 55.03C195.08 55.08 192.04 55.13 188.07 55.03C176.72 55.09 165.37 55.14 153.12 55.03C150.08 55.08 147.04 55.13 143.07 55.03C131.72 55.09 120.37 55.14 108.12 55.03C105.08 55.08 102.04 55.13 98.07 55.03C86.72 55.09 75.37 55.14 63.12 55.03C60.08 55.08 57.04 55.13 53.07 55.03M221.62 215.25C221.35 212.16 221.08 209.08 220.94 205.1C220.25 194.4 219.55 183.71 219 172.14C218.72 169.08 218.44 166.01 218.36 162.04C217.73 151.71 217.1 141.38 216.67 130.23C216.39 127.15 216.11 124.07 215.96 120.09C215.27 109.4 214.57 98.7 214.01 87.15C213.25 86.44 212.54 85.2 211.73 85.13C209.17 84.91 206.57 85.13 203.06 85.04C191.05 85.1 179.04 85.16 166.28 85.04C165.52 85.09 164.76 85.15 163.17 85.04C161.77 85.09 160.38 85.13 158.06 85.04C146.38 85.1 134.69 85.16 122.12 85.04C119.41 85.09 116.7 85.13 113.06 85.04C101.38 85.1 89.69 85.16 77.12 85.04C74.41 85.09 71.7 85.14 68.06 85.04C56.38 85.1 44.69 85.16 32.22 85.04C31.55 85.7 30.88 86.36 30.03 87.86C29.69 88.74 29.09 89.61 29.05 90.51C28.4 102.67 27.83 114.83 27.04 127.88C26.98 130.92 26.93 133.95 26.52 137.75C25.85 149.8 25.19 161.85 24.23 174.65C24.17 178.1 24.11 181.55 23.79 185.8C23.14 197.87 22.5 209.94 21.49 222.74C21.38 226.16 21.27 229.59 20.96 233.92C20.82 236.17 20.68 238.41 20.53 240.82C30.95 240.82 40.97 240.82 51.9 240.98C54.94 240.93 57.98 240.89 61.95 240.98C73.3 240.92 84.65 240.87 96.9 240.98C99.94 240.93 102.98 240.89 106.95 240.98C118.3 240.92 129.65 240.87 141.9 240.98C144.94 240.93 147.98 240.89 151.95 240.98C163.3 240.93 174.65 240.87 186.9 240.98C189.94 240.93 192.98 240.89 196.95 240.98H223.17C222.56 232.39 221.99 224.21 221.63 215.24L221.62 215.25Z" fill="currentColor"></path><path d="M111.68 142.97C113.19 142.36 114.39 141.94 115.79 141.27C135.24 133.14 154.49 125.26 173.74 117.39C174.35 117.14 174.97 116.91 175.81 116.39C180.86 114.24 185.68 112.36 190.75 110.22C192.38 109.62 193.76 109.27 195.24 108.9C198.86 116.35 201.48 123.83 201 132.54C199.73 137.41 198.4 141.84 197.06 146.64C192.8 153.79 187.72 159.71 180.11 163.49C174.41 165.94 168.93 168.12 163.22 170.59C146.41 177.59 129.82 184.32 112.94 191.16C114.83 195.89 116.58 200.29 118.52 205.15C114.05 207.04 109.83 208.83 104.87 210.92C103.48 207.58 102.12 204.29 100.48 200.74C100.03 197.42 98.54 197.05 95.98 198.23C92.86 199.67 89.64 200.88 86.24 202.45C76.53 206.5 67.05 210.29 57.26 214.21C55.85 210.96 54.48 207.81 52.94 204.33C51.75 201.38 50.73 198.75 49.44 195.88C46.26 188.26 43.35 180.88 40.16 172.81C53.85 167.11 67.66 161.35 81.75 155.48C79.91 150.86 78.15 146.44 76.23 141.63C80.79 139.71 85.14 137.87 89.85 135.89C91.45 139.65 93.14 143.23 94.47 146.93C95.3 149.25 96.46 149.72 98.75 148.3C103.13 146.4 107.25 144.78 111.69 142.98M63.8 190.92C64.38 192.16 64.97 193.39 65.6 194.73C75.1 190.77 84.14 186.99 93.36 183.14C91.28 178.21 89.45 173.89 87.48 169.24C84.36 170.67 81.68 171.89 78.27 173.12C72.06 175.72 65.86 178.31 59.45 180.99C61.01 184.42 62.31 187.27 63.8 190.91M121.66 171.49C126.78 169.29 131.89 167.09 137.73 164.87C148.92 160.23 160.16 155.69 171.29 150.92C181.27 146.64 186.99 137.55 185.25 128.68C175.77 132.78 166.36 136.84 156.2 140.93C150.75 143.27 145.31 145.6 139.12 147.98C126.63 153.15 114.14 158.31 101.39 163.59C103.48 168.57 105.32 172.95 107.26 177.54C112.14 175.43 116.56 173.53 121.65 171.5L121.66 171.49Z" fill="currentColor"></path></g><defs><clippath id="clip0_21_14"><rect width="243" height="256" fill="currentColor"></rect></clippath></defs></svg></div><div li-element="mini-cart-item-count" class="nav_shop-quantity" x-data="{ items: 0 }" x-text="items" @carttotalitems.window="items = event.detail">1</div></div><nav li-element="mini-cart-container" class="nav_mini-cart-holder w-dropdown-list" :class="open || 'mini-cart-closed'"><div li-element="dropdown-toggle" class="nav_mini-cart-close" data-dropdowntoggle="" @click="LiquifyHelper.triggerClick($event.target.closest('.w-dropdown').querySelector('.w-dropdown-toggle.w--open'))"></div><div class="mini-cart_component"><div li-element="mini-cart-full" class="mini-cart_full" :style="total.items < 1 && { display: 'none' }"><div class="mini-cart_header"><div class="heading-style-h3">EVIDENCE BAG</div><div li-element="dropdown-toggle" class="mini-cart_close w-embed" data-dropdowntoggle="" @click="LiquifyHelper.triggerClick($event.target.closest('.w-dropdown').querySelector('.w-dropdown-toggle.w--open'))"><svg width="15" height="15" viewbox="0 0 15 15" fill="none"><path d="M1.84775 14.178L0.447754 12.778L6.04775 7.17798L0.447754 1.57798L1.84775 0.177979L7.44775 5.77798L13.0478 0.177979L14.4478 1.57798L8.84775 7.17798L14.4478 12.778L13.0478 14.178L7.44775 8.57798L1.84775 14.178Z" fill="currentColor"></path></svg></div></div><div class="mini-cart_line-item no-scrollbar"><ul role="list" class="mini-cart_line-item_list w-list-unstyled"><template x-for="product in products" :key="product.key">
+    <li li-element="mini-cart-item" class="mini-cart_line-item_item" x-init="getCart()"><img src="../images/placholder-3.svg" loading="lazy" alt="" class="mini-cart_line-item_img" x-bind:src="product.image">
+<div class="mini-cart_line-item_product-info"><div li-js-object="product.title" class="text-size-regular text-weight-bold" x-text="product.title">Product Title</div><div class="mini-cart_line-item_price"><div li-js-price="product.price" class="text-size-small" x-text="LiquifyHelper.moneyFormat(product.price, true, '{{ shop.money_with_currency_format }}')">14,99 $</div><template x-if="product.price < product.original_price">
+            <div li-js-if="product.price < product.original_price">
+        <div li-js-price="product.original_price" class="text-size-small text-style-strikethrough text-style-muted" x-text="LiquifyHelper.moneyFormat(product.original_price, true, '{{ shop.money_with_currency_format }}')">14,99 $</div>        </div>
+    </template>
+</div><div class="mini-cart_line-item_quantity"><a li-element="mini-cart-item-decrease" href="#" class="mini-cart_line-item_quantity-adjust" :productprop="product" @click="$dispatch('decreasecartitem', { product: product.id, quantity: product.quantity, action: 'decrease' })">-</a><input li-element="mini-cart-item-quantity" class="mini-cart_line-item_quantity-adjust" value="1" :productprop="product" @blur="$dispatch('setcartitem', { product: product.id, quantity: product.quantity })" x-model="product.quantity">
+<a li-element="mini-cart-item-increase" href="#" class="mini-cart_line-item_quantity-adjust" :productprop="product" @click="$dispatch('increasecartitem', { product: product.id, quantity: product.quantity, action: 'increase' })">+</a></div><div li-element="mini-cart-item-remove" class="text-size-tiny text-color-grey text-style-link" :productprop="product" @click="$dispatch('setcartitem', { product: product.id, quantity: 0 })">Remove</div></div></li></template>
+</ul></div><div class="mini-cart_footer"><div class="mini-cart_footer_total"><div class="text-size-regular text-weight-bold">Subtotal</div><div><div li-js-price="total.price" class="text-size-regular text-weight-bold" x-text="LiquifyHelper.moneyFormat(total.price, true, '{{ shop.money_with_currency_format }}')">14,99 $</div><template x-if="total.price < original_total_price">
+            <div li-js-if="total.price < original_total_price">
+        <div li-js-price="original_total_price" class="text-size-regular text-weight-bold text-style-strikethrough text-style-muted" x-text="LiquifyHelper.moneyFormat(original_total_price, true, '{{ shop.money_with_currency_format }}')">14,99 $</div>        </div>
+    </template>
+</div></div><div li-element="mini-cart-api-response" class="mini-cart_footer-message hide"><div class="mini-cart_footer-message-item"><div class="text-size-regular text-weight-bold">Message</div><div li-js-object="cartApiResponse?.result?.message" class="text-size-regular text-weight-bold" x-text="cartApiResponse?.result?.message">14,99 $</div></div></div><a x-bind:href="'/checkout'" href="#" class="button w-button">Checkout</a><a li-object:href="routes.cart_url" href="{{ routes.cart_url }}" class="button is-secondary w-button">Cart</a></div></div><div li-cloak="hide" li-element="mini-cart-empty" :style="total.items && { display: 'none' }"><div class="mini-cart_header"><div class="heading-style-h3">Cart</div><div li-mini-cart-toggle="" class="mini-cart_close w-embed" @click="$dispatch('cartupdated.window')"><svg width="15" height="15" viewbox="0 0 15 15" fill="none"><path d="M1.84775 14.178L0.447754 12.778L6.04775 7.17798L0.447754 1.57798L1.84775 0.177979L7.44775 5.77798L13.0478 0.177979L14.4478 1.57798L8.84775 7.17798L14.4478 12.778L13.0478 14.178L7.44775 8.57798L1.84775 14.178Z" fill="currentColor"></path></svg></div></div><div class="mini-cart_empty"><div class="text-size-regular">No Products selected</div></div></div></div></nav></div>
