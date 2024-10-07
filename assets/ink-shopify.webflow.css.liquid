@@ -3882,7 +3882,8 @@ figcaption {
   grid-template-columns: max-content;
   grid-auto-columns: max-content;
   grid-auto-flow: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   display: flex;
 }
 
@@ -3927,12 +3928,13 @@ figcaption {
   grid-column-gap: 1.5rem;
   grid-row-gap: 0px;
   white-space: normal;
+  flex-flow: wrap;
   grid-template-rows: auto;
   grid-template-columns: max-content;
   grid-auto-columns: max-content;
   grid-auto-flow: column;
-  justify-content: center;
-  justify-items: start;
+  justify-content: flex-start;
+  place-items: flex-start start;
   display: flex;
 }
 
