@@ -15,7 +15,7 @@
       }
     }
   },
-  "layout": "page",
+  "layout": "page.work-of-art",
   "wrapper": "main.main-wrapper",
   "order": [
     "default"
