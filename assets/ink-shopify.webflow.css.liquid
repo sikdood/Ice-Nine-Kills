@@ -1678,10 +1678,8 @@ figcaption {
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-  position: relative;
-  bottom: auto;
-  left: auto;
-  right: auto;
+  position: absolute;
+  inset: 20% auto auto 10%;
 }
 
 .nav_component {
@@ -2357,8 +2355,13 @@ figcaption {
 .product-item_price {
   grid-column-gap: .5rem;
   grid-row-gap: .5rem;
+  background-color: var(--base-color-neutral--black);
+  border-radius: 5px;
   align-items: center;
+  padding: .5rem;
   display: flex;
+  position: absolute;
+  inset: 20% 11% auto auto;
 }
 
 .product_list-item {
@@ -3702,6 +3705,7 @@ figcaption {
   border: 1px solid var(--base-color-neutral--white);
   text-transform: uppercase;
   background-color: #f3f3f300;
+  border-radius: 5px;
   height: 3rem;
   margin-left: .5rem;
   margin-right: 0;
