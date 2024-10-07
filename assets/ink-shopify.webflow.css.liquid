@@ -1932,8 +1932,8 @@ figcaption {
 }
 
 .product-header_price-wrapper {
-  grid-column-gap: .5rem;
-  grid-row-gap: .5rem;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   align-items: center;
   display: flex;
   position: relative;
@@ -3871,6 +3871,7 @@ figcaption {
 }
 
 .footer8_credit-text {
+  text-align: center;
   font-size: .875rem;
 }
 
@@ -4012,6 +4013,13 @@ figcaption {
 
 .text-span {
   text-align: center;
+}
+
+.div-block-2 {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  flex-flow: wrap;
+  display: flex;
 }
 
 @media screen and (max-width: 991px) {
@@ -4300,7 +4308,7 @@ figcaption {
 
   .product_list {
     grid-column-gap: 2rem;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .swiper-container.is-product-gallery {
@@ -4604,6 +4612,11 @@ figcaption {
     padding-right: 3rem;
   }
 
+  .footer8_left-wrapper {
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   .footer8_form_component {
     min-width: auto;
   }
@@ -4611,6 +4624,10 @@ figcaption {
   .footer8_top-wrapper {
     grid-row-gap: 3.5rem;
     grid-template-columns: 1fr;
+  }
+
+  .footer8_right-wrapper {
+    text-align: center;
   }
 
   .link-block {
@@ -5132,6 +5149,10 @@ figcaption {
     align-items: flex-start;
     padding-bottom: 1rem;
   }
+
+  .div-block-2 {
+    flex-flow: column;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -5471,6 +5492,11 @@ figcaption {
     flex-direction: column;
     grid-template-columns: 1fr;
   }
+
+  .footer8_bottom-wrapper {
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 #w-node-efdfe76d-e495-5632-4546-bb1b588eec17-25a73f75 {
@@ -5479,10 +5505,6 @@ figcaption {
 
 #w-node-d6bbae16-8f44-71a8-a605-047474ba636f-cf39daf1 {
   grid-area: span 1 / span 1 / span 1 / span 1;
-}
-
-#w-node-d6bbae16-8f44-71a8-a605-047474ba6372-cf39daf1 {
-  justify-self: start;
 }
 
 #w-node-_1f4a994c-7640-c194-e1f7-4193b5553f7f-b641c10b {
@@ -5777,8 +5799,16 @@ figcaption {
 }
 
 @media screen and (max-width: 991px) {
+  #w-node-d6bbae16-8f44-71a8-a605-047474ba636f-cf39daf1 {
+    justify-self: center;
+  }
+
   #w-node-d6bbae16-8f44-71a8-a605-047474ba6370-cf39daf1 {
     grid-area: 1 / 1 / 2 / 4;
+  }
+
+  #w-node-d6bbae16-8f44-71a8-a605-047474ba637d-cf39daf1 {
+    justify-self: center;
   }
 
   #w-node-e70215e6-46ed-17af-2aa7-195241f33b0b-25a73fca {
@@ -5789,11 +5819,6 @@ figcaption {
 @media screen and (max-width: 767px) {
   #w-node-d6bbae16-8f44-71a8-a605-047474ba6370-cf39daf1 {
     grid-area: 1 / 1 / 2 / 2;
-  }
-
-  #w-node-d6bbae16-8f44-71a8-a605-047474ba6372-cf39daf1 {
-    grid-area: span 1 / span 3 / span 1 / span 3;
-    justify-self: start;
   }
 
   #w-node-c45bff24-6242-fee4-5061-f2f14b06a7bf-4b06a7bd {
