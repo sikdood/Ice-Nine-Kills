@@ -12,26 +12,6 @@
     "sections": {
       "header": {
         "type": "header",
-        "blocks": {
-          "vorschlaege_VbfkgK": {
-            "type": "vorschlaege",
-            "settings": {
-              "url_link": "",
-              "text_text": "Tag"
-            }
-          },
-          "vorschlaege_dTMFb8": {
-            "type": "vorschlaege",
-            "settings": {
-              "url_link": "",
-              "text_text": "Tag"
-            }
-          }
-        },
-        "block_order": [
-          "vorschlaege_VbfkgK",
-          "vorschlaege_dTMFb8"
-        ],
         "settings": {
           "collection_bestseller": "all-1",
           "collection_bestseller_limit": 6

@@ -15,11 +15,13 @@
         ".button {display: none;}"
       ],
       "settings": {
-        "image_bild": "shopify://shop_images/INK-Official-Merch-Store-DSK_2b61b2d6-a4c0-4ca9-866b-ae5071b404cb.jpg",
+        "image_mobile_banner_image": "shopify://shop_images/INK-Official-Merch-Store-MBL_1080x1080_34603194-c57f-47d8-9768-2477fc04b49d.png",
+        "image_desktop_banner_image": "shopify://shop_images/INK-Official-Merch-Store-DSK_2b61b2d6-a4c0-4ca9-866b-ae5071b404cb.jpg",
         "text_headline": "",
         "richtext_text": "",
-        "url_button_link": "",
-        "text_button_text": ""
+        "checkbox_enable_button": false,
+        "text_button_text": "",
+        "url_button_link": ""
       }
     },
     "category": {
