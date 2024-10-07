@@ -9,7 +9,7 @@
 {% endform %}
 <div li-object="form.errors | default_errors" class="text-size-regular text-color-red">{{ form.errors | default_errors }}</div><div class="text-size-tiny">By subscribing you agree to with our <a href="#"><span>Privacy Policy</span></a></div><div class="form_message-success-wrapper w-form-done"><div class="form_message-success"><div>Thank you for joining our cult!</div></div></div><div class="form_message-error-wrapper w-form-fail"><div class="form_message-error-2"><div>Oops! Something went wrong while submitting the form.</div></div></div></div></div></div></div><div class="line-divider"></div><div class="padding-top padding-medium"><div class="footer_bottom-wrapper">{% for link in linklists['legal'].links %}    <div li-for="link in linklists['legal'].links" class="w-layout-grid footer_legal-list">
                                     
-                            <a li="" href="#" class="footer_legal-link">Privacy Policy</a>
+                            <a li-object="link.title" li-object:href="link.url" href="{{ link.url }}" class="footer_legal-link">{{ link.title }}</a>
                             
                         </div>
 {% endfor %}<div class="footer_credit-text"> {{ section.settings.richtext_footer_signature }} </div>
