@@ -445,6 +445,12 @@ figcaption {
 }
 
 .padding-global.padding-section-medium {
+  grid-column-gap: .5rem;
+  grid-row-gap: .5rem;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
   position: relative;
 }
 
@@ -731,6 +737,7 @@ figcaption {
   border: 1px solid var(--base-color-neutral--white);
   background-color: var(--base-color-neutral--black);
   color: var(--base-color-neutral--white);
+  padding-bottom: .25rem;
 }
 
 .button.is-secondary:hover {
@@ -4084,6 +4091,18 @@ figcaption {
 .image.dropdown {
   position: absolute;
   inset: 0% 0% auto;
+}
+
+.bag_presave-logo {
+  width: 250px;
+  max-width: 90%;
+}
+
+.bag_presave-link {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 @media screen and (max-width: 991px) {
