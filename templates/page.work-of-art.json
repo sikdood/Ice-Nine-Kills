@@ -9,16 +9,16 @@
 */
 {
   "sections": {
-    "default": {
-      "type": "default",
-      "disabled": true,
+    "headquarters_FgyJBz": {
+      "type": "headquarters",
       "settings": {
+        "url_presave_link": ""
       }
     }
   },
   "layout": "page.work-of-art",
   "wrapper": "main.main-wrapper",
   "order": [
-    "default"
+    "headquarters_FgyJBz"
   ]
 }
