@@ -12,7 +12,8 @@
     "headquarters_FgyJBz": {
       "type": "headquarters",
       "settings": {
-        "url_presave_link": ""
+        "image_polaroid": "shopify://shop_images/INK-Polaroid-1.jpg",
+        "url_presave_link": "https://found.ee/INKAWOA"
       }
     }
   },
