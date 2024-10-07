@@ -439,7 +439,9 @@ figcaption {
 }
 
 .padding-global.max-width-full {
+  flex: 1;
   padding-top: 1rem;
+  position: relative;
 }
 
 .padding-global.padding-section-medium {
@@ -1677,7 +1679,7 @@ figcaption {
 }
 
 .nav_component {
-  z-index: 450;
+  z-index: 550;
   background-color: var(--base-color-neutral--black);
   border-bottom: 1px solid #3232321a;
   align-items: center;
@@ -4069,6 +4071,11 @@ figcaption {
   overflow: visible;
 }
 
+.image.dropdown {
+  position: absolute;
+  inset: 0% 0% auto;
+}
+
 @media screen and (max-width: 991px) {
   .padding-medium {
     padding: 1.5rem;
@@ -4700,6 +4707,10 @@ figcaption {
 
   .text-block-3 {
     padding-top: 5px;
+  }
+
+  .image.dropdown.desktop {
+    display: none;
   }
 }
 
