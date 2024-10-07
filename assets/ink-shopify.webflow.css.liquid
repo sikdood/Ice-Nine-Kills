@@ -454,6 +454,11 @@ figcaption {
   position: relative;
 }
 
+.padding-global.desktop {
+  position: absolute;
+  inset: 0%;
+}
+
 .text-weight-normal {
   font-weight: 400;
 }
@@ -697,6 +702,10 @@ figcaption {
   position: relative;
 }
 
+.container-large.flex-center.vertical {
+  flex-flow: column;
+}
+
 .form_message-error {
   margin-top: .75rem;
   padding: .75rem;
@@ -856,6 +865,7 @@ figcaption {
 .section_navbar {
   z-index: 1000;
   flex-flow: column;
+  margin-bottom: -1%;
   display: flex;
   position: sticky;
   top: 0;
@@ -2107,7 +2117,7 @@ figcaption {
 .header_background-image-wrapper {
   z-index: -1;
   background-image: linear-gradient(#00000080, #00000080);
-  position: absolute;
+  position: relative;
   inset: 0%;
 }
 
@@ -2128,6 +2138,10 @@ figcaption {
 
 .header_background-image.mobile {
   display: none;
+}
+
+.header_background-image.desktop {
+  position: relative;
 }
 
 .product_list {
@@ -3739,12 +3753,6 @@ figcaption {
   display: flex;
 }
 
-.bag_spline {
-  flex: none;
-  width: 100%;
-  height: 100%;
-}
-
 .button-2 {
   background-color: var(--\<unknown\|variable-9f6b6bb4-0795-c8ab-f302-bbebab6f2554\>);
   color: var(--\<unknown\|variable-2688eaeb-df93-32fe-efb9-d54fbd7bd424\>);
@@ -3788,7 +3796,7 @@ figcaption {
 }
 
 .modal1_component {
-  z-index: 99;
+  z-index: 99999;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   background-image: linear-gradient(#000000b5, #000000b5);
@@ -4045,6 +4053,9 @@ figcaption {
 .pre-loader {
   z-index: 10;
   background-color: var(--base-color-neutral--black);
+  justify-content: center;
+  align-items: center;
+  display: flex;
   position: absolute;
   inset: 0%;
 }
@@ -4103,6 +4114,16 @@ figcaption {
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+.link-block-2 {
+  width: 100%;
+  position: relative;
+}
+
+.lottie-animation {
+  width: 250px;
+  max-width: 90%;
 }
 
 @media screen and (max-width: 991px) {
@@ -4968,6 +4989,7 @@ figcaption {
 
   .header_background-image.mobile {
     display: block;
+    position: relative;
   }
 
   .header_background-image.desktop {
@@ -5205,6 +5227,15 @@ figcaption {
 
   .blog_featured-image-wrapper {
     padding-top: 66%;
+  }
+
+  .bag_target {
+    width: 100%;
+  }
+
+  .bag_spline {
+    width: auto;
+    height: auto;
   }
 
   .show-mobile-landscape {
@@ -5483,6 +5514,10 @@ figcaption {
   .swiper_button.swiper-next.pointer-events-on {
     width: 2.5rem;
     height: 2.5rem;
+  }
+
+  .header_background-image.mobile {
+    position: relative;
   }
 
   .spacer-xsmall {
