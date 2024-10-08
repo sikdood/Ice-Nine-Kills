@@ -2,6 +2,9 @@
 <div li-element="product-variant-container" class="w-layout-grid product-header_layout" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" data-productid="{{ product.id }}" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)"><div id="w-node-dde72f15-2dd1-3c3f-ef72-b299bc1979d2-25a73fd7" class="swiper-container is-product-gallery"><div class="swiper is-product-gallery"><div id="my-gallery" class="swiper-wrapper is-product-gallery">{% for image in product.images %}    <div li-for="image in product.images" class="swiper-slide is-product-gallery">
                                     
                             <div class="product_gallery-lightbox"><img loading="eager" li-object:src="image.src | product_img_url: 'master'" li-object:alt="image.alt" src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt }}" class="product_gallery-image">
+<template x-if="selected_or_first_available_variant.available != true">
+            <img class="missing_product" src="{{ 'Missing-Tag.png' | asset_url }}" alt="" li-js-if="selected_or_first_available_variant.available != true" sizes="(max-width: 479px) 81vw, (max-width: 991px) 83vw, 39vw" loading="eager" srcset="{{ 'Missing-Tag.png' | asset_url }} 500w, {{ 'Missing-Tag.png' | asset_url }} 800w, {{ 'Missing-Tag.png' | asset_url }} 1080w, {{ 'Missing-Tag.png' | asset_url }} 1377w">
+    </template>
 </div>
                             
                         </div>
@@ -15,11 +18,7 @@
             <div li-js-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
         <div li-object="product.compare_at_price | money" class="text-size-regular text-style-strikethrough text-align-right text-style-muted">{{ product.compare_at_price | money }}</div>        </div>
     </template>
-<div class="product-header_tag-list"><template x-if="selected_or_first_available_variant.available != true">
-            <div li-js-if="selected_or_first_available_variant.available != true" class="product-item_tag">
-        SOLD OUT        </div>
-    </template>
-<template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
+<div class="product-header_tag-list"><template x-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price">
             <div li-js-if="selected_or_first_available_variant.compare_at_price > selected_or_first_available_variant.price" class="product-item_tag is-red">
         Sale        </div>
     </template>
