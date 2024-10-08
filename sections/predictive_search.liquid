@@ -34,8 +34,8 @@
 {% endif %}    </div>
 {% endif %}{% unless predictive_search.performed %}    <div li-unless="predictive_search.performed">
     <div class="predictive-search_overflow"><div><div><div class="predictive-search_topic"><div class="predictive-search_headline"><div class="text-style-muted">SUGGESTIONS</div></div><ul role="list" class="predictive-search_list w-list-unstyled">{% for block in section.blocks %}
-    {% if block.type == "vorschlaege" %}
-                    <li li-block="Vorschlaege" class="predictive-search_item">
+    {% if block.type == "tags" %}
+                    <li li-block="Tags" class="predictive-search_item">
                                     <a class="predictive-search_link w-inline-block" href="{{ block.settings.url_link }}"> <div>{{ block.settings.text_text }}</div> </a>
 
                             </li>
@@ -50,4 +50,4 @@
 </li>
 {% endfor %}
 </ul></div></div></div></div>    </div>
-{% endunless %} {% schema %} {"tag":"div","name":"predictive_search","blocks":[{"name":"Vorschlaege","type":"vorschlaege","settings":[{"id":"url_link","type":"url","label":"Link"},{"id":"text_text","type":"text","label":"Text","default":"Tag"}]}],"settings":[{"id":"collection_bestseller","type":"collection","label":"Bestseller"},{"type":"range","id":"collection_bestseller_limit","min":1,"max":99,"step":1,"label":"Limit: Bestseller","default":6}],"presets":[{"name":"predictive_search","category":"Liquify"}]} {% endschema %}
+{% endunless %} {% schema %} {"tag":"div","name":"predictive_search","blocks":[{"name":"Tags","type":"tags","settings":[{"id":"url_link","type":"url","label":"Link"},{"id":"text_text","type":"text","label":"Text","default":"Tag"}]}],"settings":[{"id":"collection_bestseller","type":"collection","label":"Bestseller"},{"type":"range","id":"collection_bestseller_limit","min":1,"max":99,"step":1,"label":"Limit: Bestseller","default":6}],"presets":[{"name":"predictive_search","category":"Liquify"}]} {% endschema %}
