@@ -12,8 +12,10 @@
     "headquarters_FgyJBz": {
       "type": "headquarters",
       "settings": {
-        "image_polaroid": "shopify://shop_images/INK-Polaroid-1.jpg",
-        "url_presave_link": "https://found.ee/INKAWOA"
+        "text_bag_message": "Open Art’s Trash Bag For Evidence",
+        "image_arts_bag": "shopify://shop_images/Ice-Nine-Kills-bag-4.gif",
+        "url_presave_link": "https://found.ee/INKAWOA",
+        "image_polaroid": "shopify://shop_images/INK-Polaroid-1.jpg"
       }
     }
   },
