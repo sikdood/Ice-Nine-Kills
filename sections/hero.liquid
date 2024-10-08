@@ -1,9 +1,2 @@
-<a href="#" class="link-block-2 w-inline-block"><div class="header_background-image-wrapper"><div class="header_overlay-layer"></div><img class="header_background-image mobile"
-     src="{{ section.settings.image_mobile_banner_image | img_url: 'master' }}"
-     alt="{{ section.settings.image_mobile_banner_image.alt }}"
-     loading="lazy">
-<img class="header_background-image desktop"
-     src="{{ section.settings.image_desktop_banner_image | img_url: 'master' }}"
-     alt="{{ section.settings.image_desktop_banner_image.alt }}"
-     loading="lazy">
-</div></a> {% schema %} {"tag":"header","name":"hero","class":"section_header-home","settings":[{"id":"image_mobile_banner_image","type":"image_picker","label":"Mobile-Banner-Image"},{"id":"image_desktop_banner_image","type":"image_picker","label":"Desktop-Banner-Image"}],"presets":[{"name":"hero","category":"Liquify"}]} {% endschema %}
+<a class="link-block-2 w-inline-block" href="{{ section.settings.url_banner_link }}"> <div class="header_background-image-wrapper"><div class="header_overlay-layer"></div><img class="header_background-image mobile" src="{{ section.settings.image_mobile_banner_image | img_url: 'master' }}" alt="{{ section.settings.image_mobile_banner_image.alt }}" loading="lazy"><img class="header_background-image desktop" src="{{ section.settings.image_desktop_banner_image | img_url: 'master' }}" alt="{{ section.settings.image_desktop_banner_image.alt }}" loading="lazy"></div> </a>
+ {% schema %} {"tag":"header","name":"hero","class":"section_header-home","settings":[{"id":"url_banner_link","type":"url","label":"Banner Link"},{"id":"image_mobile_banner_image","type":"image_picker","label":"Mobile-Banner-Image"},{"id":"image_desktop_banner_image","type":"image_picker","label":"Desktop-Banner-Image"}],"presets":[{"name":"hero","category":"Liquify"}]} {% endschema %}
