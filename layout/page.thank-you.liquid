@@ -1,25 +1,11 @@
-{%- comment %}<locksmith:ff41>{% endcomment -%}
-  {%- include 'locksmith' -%}
-{%- comment %}</locksmith:ff41>{% endcomment -%}
-
 <!doctype html>
-<html data-wf-page="6701a3f6ca8bcddc25a73fcd" data-wf-site="6701a3f6ca8bcddc25a73f71" lang="en"><head>{{ locksmith_initializations }}
-<meta charset="utf-8">
-<title>{{ page_title }}</title>{%- comment %}<locksmith:a7a4>{% endcomment -%}{%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta content="{{ page_description }}" name="description">{% endif -%}{%- comment %}original: <meta content="{{ page_description }}" name="description">{%- endcomment %}{%- comment %}</locksmith:a7a4>{% endcomment -%}
-{%- comment %}<locksmith:5ec5>{% endcomment -%}
-  {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta content="{{ page_title }}" property="og:title">{% endif -%}
-  {%- comment %}original: <meta content="{{ page_title }}" property="og:title">{%- endcomment %}
-{%- comment %}</locksmith:5ec5>{% endcomment -%}
-{%- comment %}<locksmith:e21a>{% endcomment -%}
-  {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta content="{{ page_description }}" property="og:description">{% endif -%}
-  {%- comment %}original: <meta content="{{ page_description }}" property="og:description">{%- endcomment %}
-{%- comment %}</locksmith:e21a>{% endcomment -%}
+<html data-wf-page="6701a3f6ca8bcddc25a73fcd" data-wf-site="6701a3f6ca8bcddc25a73f71" lang="en"><head><meta charset="utf-8">
+<title>{{ page_title }}</title><meta content="{{ page_description }}" name="description">
+<meta content="{{ page_title }}" property="og:title">
+<meta content="{{ page_description }}" property="og:description">
 <meta content="{{ page_title }}" property="twitter:title">
 <meta content="{{ page_description }}" property="twitter:description">
-{%- comment %}<locksmith:a370>{% endcomment -%}
-  {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta property="og:type" content="website">{% endif -%}
-  {%- comment %}original: <meta property="og:type" content="website">{%- endcomment %}
-{%- comment %}</locksmith:a370>{% endcomment -%}
+<meta property="og:type" content="website">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="Webflow" name="generator">
