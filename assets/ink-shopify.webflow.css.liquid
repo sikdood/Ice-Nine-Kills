@@ -11,8 +11,10 @@
   --base-color-system--focus-state: #2d62ff;
   --background-color--background-tertiary: var(--base-color-neutral--neutral-dark);
   --base-color-neutral--neutral-dark: #444;
-  --base-color-brand--red: #cf0000;
+  --yellow: #ecca06;
+  --link-color--link-secondary: var(--base-color-neutral--black);
   --base-color-neutral--neutral-lightest: #eee;
+  --base-color-brand--red: #cf0000;
   --accessible-components-dark-grey\<deleted\|variable-c4d8099c\>: #9b9b9b;
   --text-color--text-error: var(--base-color-brand--red);
   --base-color-system--success-green-dark: #17660f;
@@ -38,7 +40,6 @@
   --border-color--border-alternate: var(--base-color-neutral--neutral-darker);
   --border-radius--large: 1rem;
   --link-color--link-primary: var(--base-color-brand--red);
-  --link-color--link-secondary: var(--base-color-neutral--black);
   --link-color--link-alternate: var(--base-color-neutral--white);
   --link-color--color: white;
 }
@@ -803,7 +804,8 @@ figcaption {
 }
 
 .button.is-third {
-  background-color: var(--base-color-brand--red);
+  background-color: var(--yellow);
+  color: var(--link-color--link-secondary);
 }
 
 .li-styleguide_classes {
@@ -1663,12 +1665,12 @@ figcaption {
   background-image: linear-gradient(51deg, black, #202020 54%, #161616 64%, var(--base-color-neutral--black));
   color: var(--base-color-neutral--white);
   border-radius: 5px;
-  flex-direction: column;
+  flex-flow: row;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
+  width: 80%;
   margin-bottom: 2rem;
-  padding: .85rem;
+  padding: .25rem .95rem;
   text-decoration: none;
   display: flex;
   position: absolute;
@@ -1678,7 +1680,8 @@ figcaption {
 .product-item_left {
   flex-flow: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  width: 75%;
   margin-right: 0;
   display: flex;
 }
@@ -2378,11 +2381,13 @@ figcaption {
   grid-row-gap: .5rem;
   background-color: var(--base-color-neutral--black);
   border-radius: 5px;
+  justify-content: flex-end;
   align-items: center;
-  padding: .5rem;
+  width: 20%;
+  padding: 0;
   display: flex;
-  position: absolute;
-  inset: 20% 11% auto auto;
+  position: relative;
+  inset: auto;
 }
 
 .product_list-item {
@@ -2396,7 +2401,7 @@ figcaption {
 .swiper-container.is-product-gallery {
   height: auto;
   position: sticky;
-  top: 6rem;
+  top: 5rem;
 }
 
 .footer_member-wrapper {
@@ -2629,7 +2634,7 @@ figcaption {
 .product-item_tag {
   border: 1px none var(--base-color-neutral--neutral-lighter);
   border-radius: var(--border-radius--medium);
-  background-color: var(--base-color-neutral--white);
+  background-color: var(--yellow);
   color: var(--base-color-neutral--black);
   text-transform: uppercase;
   padding: .3rem .5rem;
@@ -4060,7 +4065,7 @@ figcaption {
   background-color: var(--base-color-neutral--black);
   justify-content: center;
   align-items: center;
-  display: flex;
+  display: none;
   position: absolute;
   inset: 0%;
 }
@@ -4129,6 +4134,10 @@ figcaption {
 .lottie-animation {
   width: 250px;
   max-width: 90%;
+}
+
+.text-color-yellow {
+  color: var(--yellow);
 }
 
 @media screen and (max-width: 991px) {
@@ -4237,10 +4246,6 @@ figcaption {
   .login_form {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  .product-item_text-link {
-    width: 65%;
   }
 
   .product-item_tag_list {
@@ -4423,10 +4428,6 @@ figcaption {
   .product_list {
     grid-column-gap: 2rem;
     grid-template-columns: 1fr 1fr;
-  }
-
-  .product-item_price {
-    right: 15%;
   }
 
   .swiper-container.is-product-gallery {
@@ -5032,10 +5033,6 @@ figcaption {
     width: 8.7rem;
   }
 
-  .product-item_price {
-    right: 10%;
-  }
-
   .footer_grid-payment {
     grid-template-columns: 1fr;
   }
@@ -5364,6 +5361,12 @@ figcaption {
     font-size: 1.15rem;
   }
 
+  .form-input.is-quantity {
+    color: var(--base-color-neutral--white);
+    text-align: center;
+    width: 100%;
+  }
+
   .heading-style-h2 {
     font-size: 2rem;
   }
@@ -5562,6 +5565,10 @@ figcaption {
 
   .footer_member {
     padding: 1.7rem;
+  }
+
+  .product-header_quantity {
+    flex-flow: column;
   }
 
   .nav_dropdown-grid {
