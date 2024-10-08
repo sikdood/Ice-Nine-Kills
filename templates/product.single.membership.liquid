@@ -34,8 +34,14 @@
     <!-- Product Metatags -->
     <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
     <meta itemprop="image" content="{{ featured_image }}">
-    <meta property="og:title" content="{{ product.title }}">
-    <meta property="og:image" content="{{ featured_image }}">
+    {%- comment %}<locksmith:b522>{% endcomment -%}
+      {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta property="og:title" content="{{ product.title }}">{% endif -%}
+      {%- comment %}original: <meta property="og:title" content="{{ product.title }}">{%- endcomment %}
+    {%- comment %}</locksmith:b522>{% endcomment -%}
+    {%- comment %}<locksmith:800e>{% endcomment -%}
+      {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta property="og:image" content="{{ featured_image }}">{% endif -%}
+      {%- comment %}original: <meta property="og:image" content="{{ featured_image }}">{%- endcomment %}
+    {%- comment %}</locksmith:800e>{% endcomment -%}
     <meta property="og:url" content="{{ shop.url }}{{ product.url }}">
 
     <!-- Left Column -->

@@ -53,8 +53,14 @@
     <!-- Product Metatags -->
     <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
     <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
-    <meta property="og:title" content="{{ product.title }}">
-    <meta property="og:image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+    {%- comment %}<locksmith:c308>{% endcomment -%}
+      {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta property="og:title" content="{{ product.title }}">{% endif -%}
+      {%- comment %}original: <meta property="og:title" content="{{ product.title }}">{%- endcomment %}
+    {%- comment %}</locksmith:c308>{% endcomment -%}
+    {%- comment %}<locksmith:2136>{% endcomment -%}
+      {%- capture var %}{% render 'locksmith-variables', variable: 'transparent', hiding_scope: 'resource' %}{% endcapture %}{% if var == 'true' %}<meta property="og:image" content="{{ product.featured_image.src | img_url: 'grande' }}">{% endif -%}
+      {%- comment %}original: <meta property="og:image" content="{{ product.featured_image.src | img_url: 'grande' }}">{%- endcomment %}
+    {%- comment %}</locksmith:2136>{% endcomment -%}
     <meta property="og:url" content="{{ shop.url }}{{ product.url }}">
     <!-- Left Column -->
     <div class="single-col col-2_4">
