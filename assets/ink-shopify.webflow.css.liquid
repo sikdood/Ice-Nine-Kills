@@ -11,13 +11,12 @@
   --base-color-system--focus-state: #2d62ff;
   --background-color--background-tertiary: var(--base-color-neutral--neutral-dark);
   --base-color-neutral--neutral-dark: #444;
-  --yellow: #ecca06;
-  --link-color--link-secondary: var(--base-color-neutral--black);
-  --base-color-neutral--neutral-lightest: #eee;
   --base-color-brand--red: #cf0000;
+  --base-color-neutral--neutral-lightest: #eee;
   --accessible-components-dark-grey\<deleted\|variable-c4d8099c\>: #9b9b9b;
   --text-color--text-error: var(--base-color-brand--red);
   --base-color-system--success-green-dark: #17660f;
+  --yellow: #ecca06;
   --base-color-system--error-red: #cf0000;
   --background-color--background-error: var(--base-color-system--error-red);
   --text-color--text-primary: var(--base-color-neutral--black);
@@ -40,6 +39,7 @@
   --border-color--border-alternate: var(--base-color-neutral--neutral-darker);
   --border-radius--large: 1rem;
   --link-color--link-primary: var(--base-color-brand--red);
+  --link-color--link-secondary: var(--base-color-neutral--black);
   --link-color--link-alternate: var(--base-color-neutral--white);
   --link-color--color: white;
 }
@@ -804,8 +804,8 @@ figcaption {
 }
 
 .button.is-third {
-  background-color: var(--yellow);
-  color: var(--link-color--link-secondary);
+  background-color: var(--base-color-brand--red);
+  color: var(--base-color-neutral--white);
 }
 
 .li-styleguide_classes {
@@ -1666,7 +1666,7 @@ figcaption {
   color: var(--base-color-neutral--white);
   border-radius: 5px;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 80%;
   margin-bottom: 2rem;
@@ -1680,8 +1680,7 @@ figcaption {
 .product-item_left {
   flex-flow: column;
   justify-content: space-between;
-  align-items: flex-start;
-  width: 75%;
+  align-items: center;
   margin-right: 0;
   display: flex;
 }
@@ -1699,7 +1698,7 @@ figcaption {
   align-items: flex-start;
   display: flex;
   position: absolute;
-  inset: 20% auto auto 10%;
+  inset: 15% auto auto 5%;
 }
 
 .nav_component {
@@ -2085,8 +2084,12 @@ figcaption {
 }
 
 .product_gallery-lightbox {
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  display: flex;
+  position: relative;
 }
 
 .product_gallery-image {
@@ -2377,17 +2380,19 @@ figcaption {
 }
 
 .product-item_price {
-  grid-column-gap: .5rem;
-  grid-row-gap: .5rem;
+  grid-column-gap: 0rem;
+  grid-row-gap: 0rem;
   background-color: var(--base-color-neutral--black);
-  border-radius: 5px;
-  justify-content: flex-end;
+  border-radius: 100%;
+  flex-flow: column;
+  justify-content: center;
   align-items: center;
-  width: 20%;
-  padding: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  padding: .5rem;
   display: flex;
-  position: relative;
-  inset: auto;
+  position: absolute;
+  inset: 15% 5% auto auto;
 }
 
 .product_list-item {
@@ -4137,7 +4142,20 @@ figcaption {
 }
 
 .text-color-yellow {
-  color: var(--yellow);
+  color: var(--base-color-brand--red);
+}
+
+.missing_tag {
+  z-index: 100;
+  width: 80%;
+  position: absolute;
+}
+
+.missing_product {
+  z-index: 10;
+  width: 90%;
+  position: absolute;
+  inset: auto;
 }
 
 @media screen and (max-width: 991px) {
