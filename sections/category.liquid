@@ -1,6 +1,6 @@
-<div class="padding-global padding-section-medium"><div class="container-large"><div class="product_component"><div id="w-node-efdfe76d-e495-5632-4546-bb1b588eec17-25a73f75" class="product_heading-wrapper"><div class="product_heading"><div class="max-width-large"><h2 class="heading-style-h2">
+<div class="padding-global padding-section-medium"><div class="container-large"><div class="product_component"><div class="product_heading-wrapper"><div class="product_heading"><div class="max-width-large"><h1 data-w-id="efdfe76d-e495-5632-4546-bb1b588eec1a" style="color: {{ shop.brand.colors.primary[0].foreground }}" class="heading-style-h1 brand">
 {{ section.settings.text_headline }}
-</h2>
+</h1>
 </div></div><div class="product_button-row hide-mobile-landscape"><a class="button w-button" href="{{ section.settings.url_button_link }}"> {{ section.settings.text_button_text }} </a>
 </div></div><div class="product_list-wrapper w-dyn-list"><div role="list" class="product_list w-dyn-items">{% for product in section.settings.collection_collection.products limit: section.settings.collection_collection_limit %}
 <div role="listitem" class="product_list-item w-dyn-item">
@@ -10,4 +10,4 @@
     
 </div>
 {% endfor %}
-</div><div class="hide w-dyn-empty"><div>No items found.</div></div></div></div></div></div> {% schema %} {"tag":"section","name":"category","class":"section_product","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Short heading here"},{"id":"url_button_link","type":"url","label":"Button-Link"},{"id":"text_button_text","type":"text","label":"Button-Text","default":"All products"},{"id":"collection_collection","type":"collection","label":"Collection"},{"type":"range","id":"collection_collection_limit","min":1,"max":99,"step":1,"label":"Limit: Collection","default":6}],"presets":[{"name":"category","category":"Liquify"}]} {% endschema %}
+</div><div class="hide w-dyn-empty"><div>No items found.</div></div></div></div></div></div> {% schema %} {"tag":"section","name":"category","class":"section_product","settings":[{"id":"text_headline","type":"text","label":"Headline","default":"Short heading here"},{"id":"url_button_link","type":"url","label":"Button-Link"},{"id":"text_button_text","type":"text","label":"Button-Text","default":"ALL\u00a0MERCH"},{"id":"collection_collection","type":"collection","label":"Collection"},{"type":"range","id":"collection_collection_limit","min":1,"max":99,"step":1,"label":"Limit: Collection","default":6}],"presets":[{"name":"category","category":"Liquify"}]} {% endschema %}
