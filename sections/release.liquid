@@ -1,0 +1,12 @@
+<div class="container-large-2"><div class="padding-section-large"><div class="header_component"><div class="w-layout-grid header_content"><div id="w-node-ff561f57-3283-82ce-6319-2456284d0d57-cda66762" data-w-id="ff561f57-3283-82ce-6319-2456284d0d57" style="opacity:0" class="header_content-left"><h1 class="heading-style-h2">
+{{ section.settings.text_heading }}
+</h1>
+<div class="margin-bottom margin-small"><h1>
+{{ section.settings.text_title }}
+</h1>
+</div><div class="margin-top margin-medium"><div class="button-group-2"><a class="button w-button" href="{{ section.settings.url_button_link }}"> {{ section.settings.text_button_text }} </a>
+</div></div></div><div class="header_image-wrapper"><img class="header_image"
+     src="{{ section.settings.image_release_cover | img_url: 'master' }}"
+     alt="{{ section.settings.image_release_cover.alt }}"
+     loading="lazy">
+</div></div></div></div></div> {% schema %} {"tag":"div","name":"release","class":"padding-global-2","settings":[{"id":"text_heading","type":"text","label":"Heading","default":"Heading"},{"id":"text_title","type":"text","label":"Title","default":"Medium length hero heading goes here"},{"id":"url_button_link","type":"url","label":"Button Link"},{"id":"text_button_text","type":"text","label":"Button Text","default":"Button"},{"id":"image_release_cover","type":"image_picker","label":"Release Cover"}],"presets":[{"name":"release","category":"Liquify"}]} {% endschema %}
